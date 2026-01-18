@@ -1,3 +1,8 @@
+<p align="right">
+  <a href="./README_EN.md"><img alt="language English" src="https://img.shields.io/badge/language-English-9aa0a6?style=flat-square"></a>
+  <a href="./README.md"><img alt="语言 简体中文" src="https://img.shields.io/badge/语言-简体中文-e05d44?style=flat-square"></a>
+</p>
+
 # nosal-murder-mystery-game（NoSQL 课程项目汇总）
 
 【课程中相关虚拟机的部分没有展示】
@@ -52,4 +57,3 @@ English version: `README_EN.md`
 ## 版权与使用说明
 
 本仓库用于课程学习与实验归档，包含的测试结果、截图与文档用于课程汇报与复现验证。
-

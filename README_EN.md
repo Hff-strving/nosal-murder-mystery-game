@@ -1,3 +1,8 @@
+<p align="right">
+  <a href="./README_EN.md"><img alt="language English" src="https://img.shields.io/badge/language-English-1f6feb?style=flat-square"></a>
+  <a href="./README.md"><img alt="语言 简体中文" src="https://img.shields.io/badge/语言-简体中文-9aa0a6?style=flat-square"></a>
+</p>
+
 # nosal-murder-mystery-game (NoSQL Course Portfolio)
 
 [VM-related parts used in the course are not included/shown in this repository.]
@@ -48,4 +53,3 @@ Entry points:
 - Deployment & run: `scriptkill-store-nosql/README.md`
 - Tech docs: `scriptkill-store-nosql/docs/mongodb_tech_doc.md`, `scriptkill-store-nosql/docs/redis_tech_doc.md`
 - Report materials: `scriptkill-store-nosql/docs/`
-
