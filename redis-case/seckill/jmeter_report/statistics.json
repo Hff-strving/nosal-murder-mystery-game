@@ -1,0 +1,34 @@
+{
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 100,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 39.52000000000002,
+    "medianResTime" : 5.0,
+    "minResTime" : 3.0,
+    "maxResTime" : 189.0,
+    "pct1ResTime" : 187.20000000000005,
+    "pct2ResTime" : 189.0,
+    "pct3ResTime" : 189.0,
+    "throughput" : 110.61946902654867,
+    "receivedKBytesPerSec" : 25.710384402654867,
+    "sentKBytesPerSec" : 27.222759955752213
+  },
+  "抢购代金券" : {
+    "transaction" : "抢购代金券",
+    "sampleCount" : 100,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 39.52000000000002,
+    "medianResTime" : 5.0,
+    "minResTime" : 3.0,
+    "maxResTime" : 189.0,
+    "pct1ResTime" : 187.20000000000005,
+    "pct2ResTime" : 189.0,
+    "pct3ResTime" : 189.0,
+    "throughput" : 110.61946902654867,
+    "receivedKBytesPerSec" : 25.710384402654867,
+    "sentKBytesPerSec" : 27.222759955752213
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "info": {
+    "_postman_id": "b11c7f3a-5c8a-4e9f-9c6e-8b9b7a2e5d21",
+    "name": "剧本杀店务管理系统 - NoSQL API（MongoDB+Redis）",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Player Login (player_3001)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"player_3001\",\n  \"password\": \"123456\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('code==200', function () { pm.expect(json.code).to.eql(200); });",
+              "pm.environment.set('playerToken', json.data.token);",
+              "pm.environment.set('playerId', json.data.ref_id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth - Boss Login (boss_demo)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"boss_demo\",\n  \"password\": \"123456\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('code==200', function () { pm.expect(json.code).to.eql(200); });",
+              "pm.environment.set('adminToken', json.data.token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Scripts - List",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/scripts"
+      }
+    },
+    {
+      "name": "Scripts - Detail",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/scripts/{{scriptId}}"
+      }
+    },
+    {
+      "name": "Schedules - By Script (with player_id)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/scripts/{{scriptId}}/schedules?player_id={{playerId}}"
+      }
+    },
+    {
+      "name": "Lock - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{playerToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/locks",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"schedule_id\": {{scheduleId}}\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.code === 200 && json.data && json.data.lock_id) {",
+              "  pm.environment.set('lockId', json.data.lock_id);",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lock - Cancel",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{playerToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/locks/{{lockId}}/cancel"
+      }
+    },
+    {
+      "name": "Order - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{playerToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/orders",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"schedule_id\": {{scheduleId}}\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.code === 200 && json.data && json.data.order_id) {",
+              "  pm.environment.set('orderId', json.data.order_id);",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order - Pay",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{playerToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/orders/{{orderId}}/pay",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"channel\": 1\n}"
+        }
+      }
+    },
+    {
+      "name": "Order - Cancel",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{playerToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/orders/{{orderId}}/cancel"
+      }
+    },
+    {
+      "name": "My - Orders",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{playerToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/my/orders"
+      }
+    },
+    {
+      "name": "My - Locks",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{playerToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/my/locks"
+      }
+    },
+    {
+      "name": "Admin - Rooms",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/admin/rooms"
+      }
+    },
+    {
+      "name": "Admin - Dashboard",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/admin/dashboard"
+      }
+    },
+    {
+      "name": "Admin - Reports Top Scripts",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/admin/reports/top-scripts?limit=5"
+      }
+    },
+    {
+      "name": "Admin - DB Objects (Capability Self-check)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+        ],
+        "url": "{{baseUrl}}/api/admin/db-objects"
+      }
+    }
+  ]
+}
